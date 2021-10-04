@@ -28,12 +28,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void evaluar(View vista){
-        double n1 = Double.parseDouble(num_ad.getText().toString());
-        double n2 = Double.parseDouble(num_di.getText().toString());
-        double n3 = Double.parseDouble(num_pw.getText().toString());
-        double n4 = Double.parseDouble(num_e.getText().toString());
+        String[] strNotas = {
+                num_ad.getText().toString(),
+                num_di.getText().toString(),
+                num_pw.getText().toString(),
+                num_e.getText().toString()
+        };
 
-        double res = (n1+n2+n3+n4)/4;
+        Double[] notas = new Double[strNotas.length];
+        int i = 0;
+        double res = 0;
+
+        for(String n : strNotas){
+            if(n.isEmpty()){
+                Toast.makeText(this, "ERROR: Debes rellenar todos los campos", Toast.LENGTH_LONG).show();
+                return;
+            } else {
+                notas[i]=Double.parseDouble(n);
+                res += notas[i]/strNotas.length;
+                i++;
+            }
+        }
 
         if(res>=5 && res<=10){
             txt_res.setText("APROBADO");
